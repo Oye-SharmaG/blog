@@ -1,0 +1,29 @@
+<h1><%= @article.title %></h1>
+
+<p><%= @article.body %></p>
+
+
+<% @article.images.each do |image|%>
+<%= image_tag image , style: "width:200px;"%><br>
+<%= button_to "delete image", article_purge_image_path(@article), method: :delete %>
+
+<%= @article.tag %>
+
+<%= button_to "delete photo", pg_image_path(image.blob_id), method: :delete %>
+
+<% end %>
+<ul>
+  <li><%= link_to "Edit", edit_article_path(@article) %></li>
+
+  
+  <li><%= button_to "Destroy", article_path(@article),
+    method: :delete %></li>
+
+ 
+</ul>
+
+<h2>Comments</h2>
+<%= render @article.comments %>
+
+<h2>Add a comment:</h2>
+<%= render 'comments/form' %>
